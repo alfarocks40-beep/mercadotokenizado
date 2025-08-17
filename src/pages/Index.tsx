@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTheme } from '@/hooks/useTheme';
 
 const Index = () => {
   console.log('Index component is rendering');
@@ -6,6 +7,7 @@ const Index = () => {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
   
   // Filters state
   const [filters, setFilters] = useState({
@@ -246,18 +248,30 @@ const Index = () => {
               <button onClick={() => scrollTo('about')} className="text-foreground hover:text-primary transition-colors font-medium">{t.about}</button>
             </nav>
 
-            <div className="flex gap-1">
-              {Object.keys(translations).map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => setCurrentLang(lang)}
-                  className={`px-2 py-1 text-sm rounded ${
-                    currentLang === lang ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  {lang.toUpperCase()}
-                </button>
-              ))}
+            <div className="flex items-center gap-4">
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                title={isDark ? 'Mudar para modo claro' : 'Mudar para modo escuro'}
+              >
+                {isDark ? '☀️' : '🌙'}
+              </button>
+
+              {/* Language Selector */}
+              <div className="flex gap-1">
+                {Object.keys(translations).map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => setCurrentLang(lang)}
+                    className={`px-2 py-1 text-sm rounded ${
+                      currentLang === lang ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    {lang.toUpperCase()}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
