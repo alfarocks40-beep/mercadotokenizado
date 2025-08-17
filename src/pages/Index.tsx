@@ -528,7 +528,7 @@ const Index = () => {
           <h3 className="text-2xl font-bold mb-8">{t.about}</h3>
           <div className="p-6 border border-destructive/20 rounded-lg bg-destructive/5">
             <p className="text-muted-foreground leading-relaxed">
-              MVP independente. Não somos corretora, custodiantes ou consultores de investimento. 
+              Não somos corretora, custodiantes ou consultores de investimento. 
               Verifique sempre as informações no site oficial da emissora.
             </p>
           </div>
@@ -539,7 +539,7 @@ const Index = () => {
       <footer className="py-8 px-6 border-t border-border">
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 AtivosTokenizados • MVP Educacional • ativostokenizados.com
+            © 2025 AtivosTokenizados • Avalon • ativostokenizados.com
           </p>
         </div>
       </footer>
