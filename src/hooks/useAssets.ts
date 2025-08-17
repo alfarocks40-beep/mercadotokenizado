@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 
 export interface Asset {
@@ -14,35 +14,27 @@ export interface Asset {
   updated_at?: string;
 }
 
+async function fetchAssets(): Promise<Asset[]> {
+  const { data, error } = await supabase
+    .from('assets')
+    .select('*')
+    .order('name');
+
+  if (error) throw error;
+  return data || [];
+}
+
 export function useAssets() {
-  const [assets, setAssets] = useState<Asset[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data: assets = [], isLoading: loading, error } = useQuery({
+    queryKey: ['assets'],
+    queryFn: fetchAssets,
+  });
 
-  useEffect(() => {
-    async function fetchAssets() {
-      try {
-        setLoading(true);
-        const { data, error } = await supabase
-          .from('assets')
-          .select('*')
-          .order('name');
-
-        if (error) throw error;
-
-        setAssets(data || []);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error fetching assets');
-        console.error('Error fetching assets:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchAssets();
-  }, []);
-
-  return { assets, loading, error };
+  return { 
+    assets, 
+    loading, 
+    error: error?.message || null 
+  };
 }
 
 // Derived data helpers
