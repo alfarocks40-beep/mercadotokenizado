@@ -288,7 +288,7 @@ const Index = () => {
       </section>
 
       {/* Newsletter Section - Now inline */}
-      <section className="py-16 px-6 bg-muted/30">
+      <section id="newsletter" className="py-16 px-6 bg-muted/30">
         <div className="container mx-auto max-w-md text-center">
           <h3 className="text-2xl font-bold mb-4 text-primary">{t.newsletterTitle}</h3>
           <p className="text-muted-foreground mb-6">{t.newsletterDescription}</p>
@@ -378,7 +378,7 @@ const Index = () => {
                     </button>
                   )}
                   <button
-                    onClick={() => setIsNewsletterOpen(true)}
+                    onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
                     className="px-4 py-2 bg-accent text-accent-foreground rounded hover:bg-accent/90 transition-colors"
                   >
                     📧 {t.receiveOffers}
