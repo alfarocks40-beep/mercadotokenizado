@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import { useAssets, useAssetCategories, useAssetPlatforms } from '@/hooks/useAssets';
-import { usePlatforms } from '@/hooks/usePlatforms';
 
 const Index = () => {
   console.log('Index component is rendering');
@@ -13,7 +12,6 @@ const Index = () => {
   
   // Fetch data from Supabase
   const { assets, loading: assetsLoading, error: assetsError } = useAssets();
-  const { platforms, loading: platformsLoading, error: platformsError } = usePlatforms();
   
   // Filters state
   const [filters, setFilters] = useState({
@@ -231,7 +229,6 @@ const Index = () => {
 
             <nav className="hidden md:flex items-center space-x-8">
               <button onClick={() => scrollTo('assets')} className="text-foreground hover:text-primary transition-colors font-medium">{t.assets}</button>
-              <button onClick={() => scrollTo('platforms')} className="text-foreground hover:text-primary transition-colors font-medium">{t.platforms}</button>
               <button onClick={() => scrollTo('about')} className="text-foreground hover:text-primary transition-colors font-medium">{t.about}</button>
             </nav>
 
@@ -409,26 +406,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Platforms */}
-      <section id="platforms" className="py-16 px-6 bg-muted/20">
-        <div className="container mx-auto">
-          <h3 className="text-2xl font-bold mb-8 text-center">{t.platforms}</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {platforms.map((platform) => (
-              <div key={platform.id} className="p-6 border border-border rounded-lg bg-card">
-                <h4 className="font-semibold text-lg mb-2">{platform.name}</h4>
-                <p className="text-muted-foreground mb-4">{platform.about}</p>
-                <button 
-                  onClick={() => window.open(platform.url, '_blank')}
-                  className="bg-accent text-accent-foreground px-4 py-2 rounded hover:bg-accent/90 transition-colors w-full"
-                >
-                  {t.visitPlatform}
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* About */}
       <section id="about" className="py-16 px-6">
