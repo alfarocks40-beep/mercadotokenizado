@@ -53,6 +53,72 @@ export type Database = {
         }
         Relationships: []
       }
+      assets: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          name: string
+          platform: string
+          term: string
+          ticket: number
+          updated_at: string
+          url: string
+          yield: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          name: string
+          platform: string
+          term: string
+          ticket: number
+          updated_at?: string
+          url: string
+          yield: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          name?: string
+          platform?: string
+          term?: string
+          ticket?: number
+          updated_at?: string
+          url?: string
+          yield?: string
+        }
+        Relationships: []
+      }
+      platforms: {
+        Row: {
+          about: string
+          created_at: string
+          id: string
+          name: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          about: string
+          created_at?: string
+          id?: string
+          name: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          about?: string
+          created_at?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
