@@ -5,7 +5,6 @@ import { useAssets, useAssetCategories, useAssetPlatforms } from '@/hooks/useAss
 const Index = () => {
   console.log('Index component is rendering');
   const [currentLang, setCurrentLang] = useState('pt');
-  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isEmailSent, setIsEmailSent] = useState(false);
   const { isDark, toggleTheme } = useTheme();
@@ -45,7 +44,12 @@ const Index = () => {
       term: 'Prazo',
       action: 'Ação',
       invest: 'Saiba mais →',
-      visitPlatform: 'Visitar plataforma →'
+      visitPlatform: 'Visitar plataforma →',
+      newsletterTitle: 'Receba novas ofertas',
+      newsletterDescription: 'Seja notificado quando novos ativos tokenizados estiverem disponíveis.',
+      emailPlaceholder: 'Seu melhor e-mail',
+      subscribe: 'Quero receber',
+      thankYou: 'Obrigado! Você receberá as novidades em seu e-mail.'
     },
     en: {
       assets: 'Assets',
@@ -66,7 +70,12 @@ const Index = () => {
       term: 'Term',
       action: 'Action',
       invest: 'Learn more →',
-      visitPlatform: 'Visit platform →'
+      visitPlatform: 'Visit platform →',
+      newsletterTitle: 'Receive new offers',
+      newsletterDescription: 'Be notified when new tokenized assets become available.',
+      emailPlaceholder: 'Your best email',
+      subscribe: 'Subscribe',
+      thankYou: 'Thank you! You will receive updates in your email.'
     },
     es: {
       assets: 'Activos',
@@ -84,10 +93,15 @@ const Index = () => {
       asset: 'Activo',
       minTicket: 'Ticket mín. (R$)',
       yield: 'Rentabilidad',
-      term: 'Plazo',
+      term: 'Prazo',
       action: 'Acción',
       invest: 'Saber más →',
-      visitPlatform: 'Visitar plataforma →'
+      visitPlatform: 'Visitar plataforma →',
+      newsletterTitle: 'Recibir nuevas ofertas',
+      newsletterDescription: 'Sé notificado cuando nuevos activos tokenizados estén disponibles.',
+      emailPlaceholder: 'Tu mejor email',
+      subscribe: 'Quiero recibir',
+      thankYou: '¡Gracias! Recibirás las novedades en tu email.'
     }
   };
   
@@ -207,10 +221,9 @@ const Index = () => {
       
       setIsEmailSent(true);
       setTimeout(() => {
-        setIsNewsletterOpen(false);
         setIsEmailSent(false);
         setEmail('');
-      }, 2000);
+      }, 3000);
     }
   };
   
@@ -271,6 +284,40 @@ const Index = () => {
             <span className="px-4 py-2 bg-secondary text-secondary-foreground rounded-full text-sm">🔐 Sem custódia</span>
             <span className="px-4 py-2 bg-secondary text-secondary-foreground rounded-full text-sm">🎯 Foco em transparência</span>
           </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section - Now inline */}
+      <section className="py-16 px-6 bg-muted/30">
+        <div className="container mx-auto max-w-md text-center">
+          <h3 className="text-2xl font-bold mb-4 text-primary">{t.newsletterTitle}</h3>
+          <p className="text-muted-foreground mb-6">{t.newsletterDescription}</p>
+          
+          {isEmailSent ? (
+            <div className="py-4">
+              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-primary text-xl">✓</span>
+              </div>
+              <p className="text-primary font-medium">{t.thankYou}</p>
+            </div>
+          ) : (
+            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder={t.emailPlaceholder}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 px-4 py-3 bg-background border border-border rounded text-foreground placeholder-muted-foreground"
+                required
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors font-medium"
+              >
+                {t.subscribe}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
@@ -406,7 +453,6 @@ const Index = () => {
         </div>
       </section>
 
-
       {/* About */}
       <section id="about" className="py-16 px-6">
         <div className="container mx-auto max-w-4xl text-center">
@@ -430,7 +476,7 @@ const Index = () => {
       </footer>
 
       {/* Newsletter Modal */}
-      {isNewsletterOpen && (
+      {/* {isNewsletterOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-card border border-border rounded-lg p-6 max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
@@ -482,7 +528,7 @@ const Index = () => {
             )}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
