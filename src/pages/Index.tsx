@@ -93,7 +93,7 @@ const Index = () => {
   const ASSETS = [
     { 
       id: '1', 
-      name: 'Residencial Alpha 01', 
+      name: 'Residencial Alpha 033', 
       category: 'Imóvel', 
       platform: 'Netspaces', 
       ticket: 10000, 
