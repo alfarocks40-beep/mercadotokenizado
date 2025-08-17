@@ -201,9 +201,9 @@ const Index = () => {
     e.preventDefault();
     if (email.includes('@')) {
       // Save to localStorage
-      const newsletters = JSON.parse(localStorage.getItem('ativostokenizados-newsletters') || '[]');
+      const newsletters = JSON.parse(localStorage.getItem('mercadotokenizado-newsletters') || '[]');
       newsletters.push({ email, timestamp: new Date().toISOString(), language: currentLang });
-      localStorage.setItem('ativostokenizados-newsletters', JSON.stringify(newsletters));
+      localStorage.setItem('mercadotokenizado-newsletters', JSON.stringify(newsletters));
       
       setIsEmailSent(true);
       setTimeout(() => {
@@ -222,9 +222,9 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">AT</span>
+                <span className="text-primary-foreground font-bold text-lg">MT</span>
               </div>
-              <h1 className="text-xl font-bold text-primary">AtivosTokenizados</h1>
+              <h1 className="text-xl font-bold text-primary">Mercado Tokenizado</h1>
             </div>
 
             <nav className="hidden md:flex items-center space-x-8">
@@ -424,7 +424,7 @@ const Index = () => {
       <footer className="py-8 px-6 border-t border-border">
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground text-sm">
-            © 2025 AtivosTokenizados • Avalon • ativostokenizados.com
+            © 2025 Mercado Tokenizado • Avalon • mercadotokenizado.com
           </p>
         </div>
       </footer>
