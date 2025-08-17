@@ -475,60 +475,6 @@ const Index = () => {
         </div>
       </footer>
 
-      {/* Newsletter Modal */}
-      {/* {isNewsletterOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-lg p-6 max-w-md w-full">
-            <div className="flex justify-between items-center mb-4">
-              <h4 className="text-lg font-semibold">Receber novas ofertas</h4>
-              <button
-                onClick={() => setIsNewsletterOpen(false)}
-                className="text-muted-foreground hover:text-foreground"
-              >
-                ✕
-              </button>
-            </div>
-            
-            {isEmailSent ? (
-              <div className="text-center py-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-primary text-xl">✓</span>
-                </div>
-                <p className="text-primary font-medium">Obrigado! Você receberá as novidades em seu e-mail.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleEmailSubmit}>
-                <p className="text-muted-foreground mb-4">
-                  Seja notificado quando novos ativos tokenizados estiverem disponíveis.
-                </p>
-                <input
-                  type="email"
-                  placeholder="Seu melhor e-mail"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 bg-input border border-border rounded mb-4 text-foreground placeholder-muted-foreground"
-                  required
-                />
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setIsNewsletterOpen(false)}
-                    className="flex-1 px-4 py-2 border border-border rounded text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
-                  >
-                    Quero receber
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };
