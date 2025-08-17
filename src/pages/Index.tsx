@@ -44,7 +44,7 @@ const Index = () => {
       yield: 'Rentabilidade',
       term: 'Prazo',
       action: 'Ação',
-      invest: 'Investir →',
+      invest: 'Saiba mais →',
       visitPlatform: 'Visitar plataforma →'
     },
     en: {
@@ -65,7 +65,7 @@ const Index = () => {
       yield: 'Yield',
       term: 'Term',
       action: 'Action',
-      invest: 'Invest →',
+      invest: 'Learn more →',
       visitPlatform: 'Visit platform →'
     },
     es: {
@@ -86,7 +86,7 @@ const Index = () => {
       yield: 'Rentabilidad',
       term: 'Plazo',
       action: 'Acción',
-      invest: 'Invertir →',
+      invest: 'Saber más →',
       visitPlatform: 'Visitar plataforma →'
     }
   };
