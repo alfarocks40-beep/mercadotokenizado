@@ -16,6 +16,9 @@ interface FiltersState {
 }
 
 const Index = () => {
+  console.log('Index component starting...');
+  console.log('ASSETS data:', ASSETS);
+  
   const [filters, setFilters] = useState<FiltersState>({
     search: '',
     category: '',
