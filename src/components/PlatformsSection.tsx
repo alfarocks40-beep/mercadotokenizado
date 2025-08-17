@@ -1,11 +1,39 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExternalLink } from 'lucide-react';
-import { PLATFORMS_DATA } from '@/data/platforms';
+import { usePlatforms } from '@/hooks/usePlatforms';
 import { useLanguage } from '@/hooks/useLanguage';
 
 export const PlatformsSection = () => {
   const { t } = useLanguage();
+  const { platforms, loading, error } = usePlatforms();
+
+  if (loading) {
+    return (
+      <section id="platforms" className="py-16 px-6">
+        <div className="container mx-auto">
+          <div className="text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-muted rounded w-1/3 mx-auto mb-4"></div>
+              <div className="h-4 bg-muted rounded w-1/2 mx-auto"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="platforms" className="py-16 px-6">
+        <div className="container mx-auto">
+          <div className="text-center text-destructive">
+            Erro ao carregar plataformas: {error}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   const handleVisitPlatform = (url: string, platformName: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -24,7 +52,7 @@ export const PlatformsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PLATFORMS_DATA.map((platform) => (
+          {platforms.map((platform) => (
             <Card 
               key={platform.id} 
               className="shadow-card hover:shadow-elevated transition-smooth border-border bg-gradient-surface"

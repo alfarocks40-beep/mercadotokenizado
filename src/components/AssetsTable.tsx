@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { ArrowUpDown, ExternalLink } from 'lucide-react';
-import { Asset } from '@/data/assets';
+import { Asset } from '@/hooks/useAssets';
 import { useLanguage } from '@/hooks/useLanguage';
 import { formatCurrency } from '@/lib/i18n';
 

@@ -9,7 +9,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Search, X } from 'lucide-react';
-import { CATEGORIES, PLATFORMS } from '@/data/assets';
 import { useLanguage } from '@/hooks/useLanguage';
 
 interface FiltersState {
@@ -24,6 +23,8 @@ interface AssetsFiltersProps {
   onFiltersChange: (filters: FiltersState) => void;
   resultsCount: number;
   onReceiveOffers: () => void;
+  categories: string[];
+  platforms: string[];
 }
 
 export const AssetsFilters = ({
@@ -31,6 +32,8 @@ export const AssetsFilters = ({
   onFiltersChange,
   resultsCount,
   onReceiveOffers,
+  categories,
+  platforms,
 }: AssetsFiltersProps) => {
   const { t } = useLanguage();
 
@@ -71,7 +74,7 @@ export const AssetsFilters = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="">{t.category}</SelectItem>
-            {CATEGORIES.map((category) => (
+            {categories.map((category) => (
               <SelectItem key={category} value={category}>
                 {category}
               </SelectItem>
@@ -89,7 +92,7 @@ export const AssetsFilters = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="">{t.platform}</SelectItem>
-            {PLATFORMS.map((platform) => (
+            {platforms.map((platform) => (
               <SelectItem key={platform} value={platform}>
                 {platform}
               </SelectItem>

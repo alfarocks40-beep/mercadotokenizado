@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useTheme } from '@/hooks/useTheme';
+import { useAssets, useAssetCategories, useAssetPlatforms } from '@/hooks/useAssets';
+import { usePlatforms } from '@/hooks/usePlatforms';
 
 const Index = () => {
   console.log('Index component is rendering');
@@ -8,6 +10,10 @@ const Index = () => {
   const [email, setEmail] = useState('');
   const [isEmailSent, setIsEmailSent] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  
+  // Fetch data from Supabase
+  const { assets, loading: assetsLoading, error: assetsError } = useAssets();
+  const { platforms, loading: platformsLoading, error: platformsError } = usePlatforms();
   
   // Filters state
   const [filters, setFilters] = useState({
@@ -89,111 +95,13 @@ const Index = () => {
   
   const t = translations[currentLang as keyof typeof translations];
   
-  // Assets data - EDIT HERE TO UPDATE ASSETS
-  const ASSETS = [
-    { 
-      id: '1', 
-      name: 'Residencial Alpha 033', 
-      category: 'Imóvel', 
-      platform: 'Netspaces', 
-      ticket: 10000, 
-      yield: '12% a.a.', 
-      term: '36m', 
-      url: 'https://netspaces.com.br/' 
-    },
-    { 
-      id: '2', 
-      name: 'CarbonCredit BR-01', 
-      category: 'Carbono', 
-      platform: 'BlockBR', 
-      ticket: 500, 
-      yield: '8% a.a.', 
-      term: '24m', 
-      url: 'https://blockbr.com.br/' 
-    },
-    { 
-      id: '3', 
-      name: 'Precatório SP-22', 
-      category: 'Judicial', 
-      platform: 'Droom', 
-      ticket: 1000, 
-      yield: '15% a.a.', 
-      term: '18m', 
-      url: 'https://droom.com.br/' 
-    },
-    { 
-      id: '4', 
-      name: 'CRA Agro Norte', 
-      category: 'Crédito', 
-      platform: 'Tokenizadora', 
-      ticket: 1000, 
-      yield: 'CDI + 2%', 
-      term: '36m', 
-      url: 'https://tokenizadora.com.br/' 
-    },
-    { 
-      id: '5', 
-      name: 'Start BR Seed 01', 
-      category: 'Startup', 
-      platform: 'Tokeniza', 
-      ticket: 500, 
-      yield: 'variável', 
-      term: '60m', 
-      url: 'https://tokeniza.com.br/' 
-    },
-    { 
-      id: '6', 
-      name: 'FII Token Renda', 
-      category: 'Fundo', 
-      platform: 'Liqi', 
-      ticket: 250, 
-      yield: '10% a.a.', 
-      term: 'indef.', 
-      url: 'https://www.liqi.com.br/' 
-    }
-  ];
-  
-  // Platforms data - EDIT HERE TO UPDATE PLATFORMS
-  const PLATFORMS = [
-    { 
-      name: 'Netspaces', 
-      desc: 'Imóveis tokenizados e mercado secundário.', 
-      url: 'https://netspaces.com.br/' 
-    },
-    { 
-      name: 'Tokenizadora (Vórtx)', 
-      desc: 'Emissão e negociação reguladas de valores mobiliários tokenizados.', 
-      url: 'https://tokenizadora.com.br/' 
-    },
-    { 
-      name: 'Liqi', 
-      desc: 'Acesso a ativos antes restritos via tokenização.', 
-      url: 'https://www.liqi.com.br/' 
-    },
-    { 
-      name: 'BlockBR', 
-      desc: 'Infraestrutura e distribuição whitelabel de tokens.', 
-      url: 'https://blockbr.com.br/' 
-    },
-    { 
-      name: 'Tokeniza', 
-      desc: 'Crowdfunding com foco em democratizar investimentos.', 
-      url: 'https://tokeniza.com.br/' 
-    },
-    { 
-      name: 'Droom', 
-      desc: 'Tokenização de precatórios e direitos creditórios.', 
-      url: 'https://droom.com.br/' 
-    }
-  ];
-
-  // Get unique values for filters
-  const categories = [...new Set(ASSETS.map(asset => asset.category))].sort();
-  const platforms = [...new Set(ASSETS.map(asset => asset.platform))].sort();
+  // Get unique values for filters from the fetched data
+  const categories = useAssetCategories(assets);
+  const platformNames = useAssetPlatforms(assets);
 
   // Filter assets
   const filteredAssets = useMemo(() => {
-    return ASSETS.filter(asset => {
+    return assets.filter(asset => {
       // Search filter
       if (filters.search) {
         const searchTerm = filters.search.toLowerCase();
@@ -225,7 +133,7 @@ const Index = () => {
 
       return true;
     });
-  }, [filters]);
+  }, [assets, filters]);
 
   // Sort assets
   const sortedAssets = useMemo(() => {
@@ -398,7 +306,7 @@ const Index = () => {
                 className="px-3 py-2 bg-input border border-border rounded text-foreground"
               >
                 <option value="">{t.platform}</option>
-                {platforms.map(plat => <option key={plat} value={plat}>{plat}</option>)}
+                {platformNames.map(plat => <option key={plat} value={plat}>{plat}</option>)}
               </select>
             </div>
             
@@ -506,10 +414,10 @@ const Index = () => {
         <div className="container mx-auto">
           <h3 className="text-2xl font-bold mb-8 text-center">{t.platforms}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PLATFORMS.map((platform) => (
-              <div key={platform.name} className="p-6 border border-border rounded-lg bg-card">
+            {platforms.map((platform) => (
+              <div key={platform.id} className="p-6 border border-border rounded-lg bg-card">
                 <h4 className="font-semibold text-lg mb-2">{platform.name}</h4>
-                <p className="text-muted-foreground mb-4">{platform.desc}</p>
+                <p className="text-muted-foreground mb-4">{platform.about}</p>
                 <button 
                   onClick={() => window.open(platform.url, '_blank')}
                   className="bg-accent text-accent-foreground px-4 py-2 rounded hover:bg-accent/90 transition-colors w-full"
