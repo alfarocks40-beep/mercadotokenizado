@@ -25,10 +25,17 @@ async function fetchAssets(): Promise<Asset[]> {
 }
 
 export function useAssets() {
+  console.log('useAssets hook called');
+  
   const { data: assets = [], isLoading: loading, error } = useQuery({
     queryKey: ['assets'],
-    queryFn: fetchAssets,
+    queryFn: () => {
+      console.log('React Query executing fetchAssets');
+      return fetchAssets();
+    },
   });
+
+  console.log('useAssets state:', { assetsCount: assets.length, loading, error: error?.message });
 
   return { 
     assets, 
