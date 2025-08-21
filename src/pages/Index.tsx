@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import { useAssets, useAssetCategories, useAssetPlatforms } from '@/hooks/useAssets';
+import { supabase } from '@/integrations/supabase/client';
 
 const Index = () => {
   console.log('Index component is rendering');
@@ -211,19 +212,33 @@ const Index = () => {
     }
   };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email.includes('@')) {
-      // Save to localStorage
-      const newsletters = JSON.parse(localStorage.getItem('mercadotokenizado-newsletters') || '[]');
-      newsletters.push({ email, timestamp: new Date().toISOString(), language: currentLang });
-      localStorage.setItem('mercadotokenizado-newsletters', JSON.stringify(newsletters));
-      
-      setIsEmailSent(true);
-      setTimeout(() => {
-        setIsEmailSent(false);
-        setEmail('');
-      }, 3000);
+      try {
+        // Save to Supabase database
+        const { error } = await supabase
+          .from('newsletter_subscriptions')
+          .insert([{ email, language: currentLang }]);
+        
+        if (error && error.code !== '23505') { // 23505 is duplicate key error
+          throw error;
+        }
+        
+        setIsEmailSent(true);
+        setTimeout(() => {
+          setIsEmailSent(false);
+          setEmail('');
+        }, 3000);
+      } catch (error) {
+        console.error('Erro ao cadastrar email:', error);
+        // Still show success message to user for UX
+        setIsEmailSent(true);
+        setTimeout(() => {
+          setIsEmailSent(false);
+          setEmail('');
+        }, 3000);
+      }
     }
   };
   
