@@ -269,21 +269,6 @@ const Index = () => {
               >
                 {isDark ? '☀️' : '🌙'}
               </button>
-
-              {/* Language Selector */}
-              <div className="flex gap-1">
-                {Object.keys(translations).map((lang) => (
-                  <button
-                    key={lang}
-                    onClick={() => setCurrentLang(lang)}
-                    className={`px-2 py-1 text-sm rounded ${
-                      currentLang === lang ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    {lang.toUpperCase()}
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
         </div>
