@@ -89,7 +89,7 @@ const translations: Record<Language, Translations> = {
 
     // About
     aboutTitle: 'Sobre o AtivosTokenizados',
-    disclaimer: 'MVP independente. Não somos corretora, custodiantes ou consultores de investimento. Verifique sempre as informações no site oficial da emissora.',
+    disclaimer: 'MVP independente. Não somos corretora, custodiantes ou consultores de investimento. Não oferecemos recomendações de investimento. Verifique sempre as informações no site oficial da emissora.',
 
     // Modal
     modalTitle: 'Receber novas ofertas',
@@ -139,7 +139,7 @@ const translations: Record<Language, Translations> = {
 
     // About
     aboutTitle: 'About AtivosTokenizados',
-    disclaimer: 'Independent MVP. We are not a brokerage, custodian or investment advisor. Always verify information on the issuer\'s official website.',
+    disclaimer: 'Independent MVP. We are not a brokerage, custodian or investment advisor. We do not provide investment recommendations. Always verify information on the issuer\'s official website.',
 
     // Modal
     modalTitle: 'Receive new offers',
@@ -189,7 +189,7 @@ const translations: Record<Language, Translations> = {
 
     // About
     aboutTitle: 'Acerca de AtivosTokenizados',
-    disclaimer: 'MVP independiente. No somos corredores, custodios o asesores de inversión. Siempre verifique la información en el sitio web oficial del emisor.',
+    disclaimer: 'MVP independiente. No somos corredores, custodios o asesores de inversión. No ofrecemos recomendaciones de inversión. Siempre verifique la información en el sitio web oficial del emisor.',
 
     // Modal
     modalTitle: 'Recibir nuevas ofertas',

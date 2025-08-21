@@ -464,7 +464,7 @@ const Index = () => {
       <footer className="py-8 px-6 border-t border-border">
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground text-sm">
-            © 2025 Mercado Tokenizado • Avalon • mercadotokenizado.com
+            © 2025 Mercado Tokenizado • <a href="https://avalontc.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Avalon</a> • mercadotokenizado.com
           </p>
         </div>
       </footer>
