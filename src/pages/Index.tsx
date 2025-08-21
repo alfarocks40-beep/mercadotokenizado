@@ -377,12 +377,6 @@ const Index = () => {
                       {t.clearFilters}
                     </button>
                   )}
-                  <button
-                    onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="px-4 py-2 bg-accent text-accent-foreground rounded hover:bg-accent/90 transition-colors"
-                  >
-                    📧 {t.receiveOffers}
-                  </button>
                 </div>
               </div>
             </div>
